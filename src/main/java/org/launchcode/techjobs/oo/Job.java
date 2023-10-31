@@ -6,7 +6,6 @@ public class Job {
 
     private int id;
     private static int nextId = 1;
-
     private String name;
     private Employer employer;
     private Location location;
@@ -29,20 +28,32 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
+    @Override
+    public String toString(){
+        String s = System.lineSeparator();
+
+        return (s +
+                "ID: " + getId() + s +
+                "Name: " + (getName().isEmpty() ? "Data not available" : getName()) + s +
+                "Employer: " + (getEmployer().getValue().isEmpty() ? "Data not available" : getEmployer()) + s +
+                "Location: " + (getLocation().getValue().isEmpty() ? "Data not available" : getLocation()) + s +
+                "Position Type: " + (getPositionType().getValue().isEmpty() ? "Data not available" : getPositionType()) + s +
+                "Core Competency: " + (getCoreCompetency().getValue().isEmpty() ? "Data not available" : getCoreCompetency()) + s);
+    }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Job)) return false;
         Job job = (Job) o;
-        return id == job.id;
+        return getId() == job.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
